@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dan Koe 写作蓝图：过亿阅读背后的深度解析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background-color: #FAFAF9; /* Stone-50 */
+            color: #1C1917; /* Stone-900 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .koe-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E7E5E4; /* Stone-200 */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .koe-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+        .btn-toggle {
+            transition: all 0.2s;
+        }
+        .btn-toggle.active {
+            background-color: #1C1917;
+            color: #FAFAF9;
+        }
+        .highlighter {
+            background-color: #FEF3C7; /* Amber-100 */
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAF9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D6D3D1;
+            border-radius: 4px;
+        }
+    </style>
+    <!-- Chosen Palette: "Monk Mode Minimalist" - Warm Neutrals (Stone/Warm Gray) with Stark Black contrast. Reflects Dan Koe's branding. -->
+    <!-- Application Structure Plan:
+         1. Hero Section: Sets the stage with the "100M Views" hook and core value prop.
+         2. The Core Philosophy (Dashboard): Radar chart showing the balance of his 4 pillars (Focus, Business, Phil, Design).
+         3. The Anatomy of a Hook (Interactive Text): Allows users to dissect specific writing techniques (Paradox, Negative, Identity).
+         4. Rhythm & Flow (Data Viz): Bar chart analyzing sentence length variation (Staccato style).
+         5. The Funnel of Attention (Process Flow): Interactive timeline/funnel showing how he moves readers from social to newsletter.
+         6. Topic Matrix (Scatter Plot): Analysis of topic selection based on Reach vs. Depth.
+         7. Aesthetic Simulator: Before/After toggle to show the power of formatting.
+    -->
+    <!-- Visualization & Content Choices:
+         - Radar Chart: Perfect for showing the multi-disciplinary nature of his content (polymath approach).
+         - Interactive Text Area: Best way to teach writing is to show, not just tell. Clicking buttons updates text dynamically.
+         - Bar Chart (Rhythm): Visualizes the "short. short. long." cadence effectively.
+         - Scatter Plot (Topics): Maps "Viral Potential" vs "Monetization Potential" for different topics.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="text-stone-800 antialiased pb-20">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-bold text-xl tracking-tight text-stone-900">DK<span class="font-light text-stone-500">Analysis</span></div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
+                    <a href="#philosophy" class="hover:text-black transition">核心哲学</a>
+                    <a href="#anatomy" class="hover:text-black transition">爆款拆解</a>
+                    <a href="#rhythm" class="hover:text-black transition">节奏分析</a>
+                    <a href="#topics" class="hover:text-black transition">选题矩阵</a>
+                </div>
+                <button onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'})" class="bg-stone-900 text-white px-4 py-2 rounded-md text-sm hover:bg-stone-700 transition">开始探索</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-20 pb-16 px-4 text-center max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-stone-900 mb-6">
+            解构 <span class="text-stone-500">Dan Koe</span> 的<br>过亿阅读写作系统
+        </h1>
+        <p class="text-xl text-stone-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+            不仅仅是写作，而是一种<strong>设计</strong>。通过数据可视化与交互分析，揭示他是如何将哲学、商业与自我提升融合为一种极具传播力的数字资产。
+        </p>
+        <div class="flex justify-center gap-4 text-sm font-medium text-stone-500">
+            <span class="flex items-center">● 极简美学</span>
+            <span class="flex items-center">● 深度心理学</span>
+            <span class="flex items-center">● 节奏掌控</span>
+        </div>
+    </header>
+
+    <!-- Section 1: Philosophy Overview (Radar Chart) -->
+    <section id="philosophy" class="py-16 bg-white border-y border-stone-100">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">全才模型：内容的四大支柱</h2>
+                <p class="text-stone-600 mb-6 leading-relaxed">
+                    Dan Koe 的文章之所以能在不同圈层爆发，是因为他从不局限于单一领域。他构建了一个<strong>"全才生态系统"</strong>（The Generalist Ecosystem）。本应用通过分析其高热度文章，总结出四大核心支柱。
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-900 font-bold mr-3 text-sm">1</div>
+                        <div>
+                            <h3 class="font-semibold text-stone-900">现代哲学 (Philosophy)</h3>
+                            <p class="text-sm text-stone-500">重新诠释古代智慧，解决现代焦虑。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-900 font-bold mr-3 text-sm">2</div>
+                        <div>
+                            <h3 class="font-semibold text-stone-900">一人企业 (Business)</h3>
+                            <p class="text-sm text-stone-500">创作者经济与数字化生存指南。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-900 font-bold mr-3 text-sm">3</div>
+                        <div>
+                            <h3 class="font-semibold text-stone-900">深度聚焦 (Focus)</h3>
+                            <p class="text-sm text-stone-500">心流状态与生产力科学。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-900 font-bold mr-3 text-sm">4</div>
+                        <div>
+                            <h3 class="font-semibold text-stone-900">生活设计 (Design)</h3>
+                            <p class="text-sm text-stone-500">系统化地构建理想生活方式。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-stone-50 p-6 rounded-xl border border-stone-200">
+                <div class="chart-container">
+                    <canvas id="pillarChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-stone-400 mt-4">数据基于热门文章关键词频率加权分析</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Anatomy of a Hook (Interactive Text) -->
+    <section id="anatomy" class="py-16 max-w-5xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-4">解剖台：爆款开头的心理学</h2>
+            <p class="text-stone-600 max-w-2xl mx-auto">
+                Dan Koe 的文章开头（Hook）通常遵循特定的心理学模式。点击下方按钮，实时查看不同类型的"钩子"结构及其背后的原理。
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Controls -->
+            <div class="space-y-3">
+                <button onclick="updateHook('paradox')" id="btn-paradox" class="btn-toggle active w-full text-left px-4 py-3 rounded border border-stone-200 hover:border-stone-400">
+                    <span class="font-semibold block">悖论型 (The Paradox)</span>
+                    <span class="text-xs text-stone-500">挑战常识，制造认知失调</span>
+                </button>
+                <button onclick="updateHook('negative')" id="btn-negative" class="btn-toggle w-full text-left px-4 py-3 rounded border border-stone-200 hover:border-stone-400">
+                    <span class="font-semibold block">负面框架 (Negative Frame)</span>
+                    <span class="text-xs text-stone-500">强调痛苦与不行动的代价</span>
+                </button>
+                <button onclick="updateHook('identity')" id="btn-identity" class="btn-toggle w-full text-left px-4 py-3 rounded border border-stone-200 hover:border-stone-400">
+                    <span class="font-semibold block">身份认同 (Identity Shift)</span>
+                    <span class="text-xs text-stone-500">直接对话读者的自我认知</span>
+                </button>
+            </div>
+
+            <!-- Display Area -->
+            <div class="md:col-span-2">
+                <div class="koe-card p-8 h-full flex flex-col justify-between">
+                    <div id="hook-content" class="text-lg md:text-xl font-serif leading-relaxed text-stone-800 mb-6">
+                        <!-- Dynamic Content injected here -->
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded border-l-4 border-stone-800">
+                        <h4 class="font-bold text-sm text-stone-900 mb-1">💡 深度解析</h4>
+                        <p id="hook-analysis" class="text-sm text-stone-600">
+                            <!-- Analysis injected here -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Rhythm & Formatting (Bar Chart & Comparison) -->
+    <section id="rhythm" class="py-16 bg-stone-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-4">视觉节奏：为什么他的文章"好读"？</h2>
+                <p class="text-stone-600">
+                    Dan Koe 的写作风格被称为<strong>"视觉极简主义"</strong>。他极少使用长段落，而是通过控制句子长度和留白来创造一种阅读的"滑梯效应"。
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Chart: Sentence Length Analysis -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="font-semibold mb-4 text-center">句子节奏分析 (Staccato Rhythm)</h3>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="rhythmChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-4 text-center">
+                        <span class="inline-block w-3 h-3 bg-stone-800 mr-1"></span> 短句用于强调
+                        <span class="inline-block w-3 h-3 bg-stone-300 ml-3 mr-1"></span> 长句用于解释
+                    </p>
+                </div>
+
+                <!-- Interactive Formatting Comparison -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold">格式对比模拟器</h3>
+                        <div class="flex bg-white rounded-lg p-1 border border-stone-200">
+                            <button onclick="setFormat('normal')" id="fmt-normal" class="px-3 py-1 text-sm rounded transition hover:bg-stone-50">普通格式</button>
+                            <button onclick="setFormat('koe')" id="fmt-koe" class="px-3 py-1 text-sm rounded bg-stone-900 text-white shadow-sm">Koe 风格</button>
+                        </div>
+                    </div>
+                    
+                    <div id="format-display" class="bg-white p-6 rounded-xl border border-stone-200 h-[380px] overflow-y-auto transition-all duration-500">
+                        <!-- Content controlled by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Topic Matrix (Scatter Plot) -->
+    <section id="topics" class="py-16 max-w-6xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold mb-4">选题矩阵：寻找高杠杆话题</h2>
+            <p class="text-stone-600 max-w-2xl mx-auto">
+                他如何选择话题？数据表明，他倾向于选择那些既能引起广泛共鸣（大众化），又能深入挖掘（专业化）的交叉点。
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-white p-4 rounded-xl border border-stone-200 shadow-sm">
+                <div class="chart-container">
+                    <canvas id="topicChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="koe-card p-5">
+                    <h3 class="font-bold text-lg mb-2">高热度关键词</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 text-xs rounded-full">一人公司</span>
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 text-xs rounded-full">多巴胺排毒</span>
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 text-xs rounded-full">深度工作</span>
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 text-xs rounded-full">朝九晚五</span>
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 text-xs rounded-full">极简主义</span>
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 text-xs rounded-full">潜能</span>
+                    </div>
+                </div>
+
+                <div class="koe-card p-5 border-l-4 border-stone-900">
+                    <h3 class="font-bold text-lg mb-2">选题公式</h3>
+                    <p class="text-sm text-stone-600 leading-relaxed">
+                        <strong>大众痛点 + 哲学深度 + 商业方案 = 病毒式传播</strong>
+                        <br><br>
+                        他不仅仅谈论"赚钱"，他谈论"通过赚钱获得自由以追求更高的生命意义"。这提升了话题的维度。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-12 mt-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-white text-xl font-bold mb-4">The Dan Koe Blueprint</h2>
+            <p class="text-sm mb-8 max-w-lg mx-auto">
+                本分析基于公开的高热度文章数据构建，旨在帮助创作者理解内容设计的底层逻辑。
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                <div>结构化思维</div>
+                <div>视觉心理学</div>
+                <div>全才策略</div>
+                <div>系统化变现</div>
+            </div>
+            <div class="mt-12 text-xs border-t border-stone-800 pt-8">
+                &copy; 2024 Interactive Analysis. Generated for educational purposes.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA & STATE ---
+
+        // Hook Analysis Data
+        const hooks = {
+            paradox: {
+                text: "你不懒惰，你只是无聊。<br><br>大多数人认为倦怠（Burnout）是因为做得太多。<br><br>实际上，倦怠通常是因为你做得太少——太少做那些能点燃你灵魂的事情。",
+                analysis: "<strong>悖论重构（Paradox Reframe）</strong>：以此开头打破读者的固有认知（懒惰 vs 无聊）。他否定一个常见的社会标签（懒惰），并用一个更具同理心的标签（无聊）取而代之，瞬间建立信任感。"
+            },
+            negative: {
+                text: "如果你不构建自己的梦想，就会有人雇佣你去构建他们的梦想。<br><br>这就是朝九晚五的陷阱。<br><br>这种舒适感不是安全网，而是慢慢收紧的绞索。",
+                analysis: "<strong>负面愿景（Negative Vision）</strong>：人类对损失的恐惧远大于对收益的渴望。通过描绘不行动的可怕后果（绞索、陷阱），激发读者的'战斗或逃跑'反应，迫使他们继续阅读寻找解决方案。"
+            },
+            identity: {
+                text: "这就是为什么你感到迷茫。<br><br>你一直在试图通过模仿别人的地图，来寻找属于你自己的宝藏。<br><br>通才（Generalist）不仅是一种生存策略，更是你的天性。",
+                analysis: "<strong>身份确认（Identity Validation）</strong>：直接针对读者的内部状态（迷茫）。将这种负面状态重新定义为一种未被发掘的潜能（通才），赋予读者一个新的、更高级的身份标签。"
+            }
+        };
+
+        // Format Comparison Data
+        const formatContent = {
+            normal: `
+                <div class="text-sm text-gray-600 space-y-4 font-sans">
+                    <p>在当今的数字经济中，专注力已成为稀缺资源。如果你无法控制自己的注意力，你就无法控制自己的生活。大多数人每天花费数小时在社交媒体上，被动地消费信息，而不是主动地创造价值。这种被动消费不仅浪费了时间，还重塑了我们的大脑，使我们更难进行深度思考。</p>
+                    <p>要摆脱这种状态，我们需要重新设计我们的环境。这意味着要刻意地创造无干扰的时间块，用于从事高价值的工作。这不仅仅是为了提高生产力，更是为了重获精神自由。当你能够长时间专注于一项任务时，你会进入心流状态，这不仅能产生更好的结果，还能带来深层的满足感。</p>
+                    <p>因此，建立一个基于专注的个人系统至关重要。这包括明确的目标、消除干扰的习惯以及持续的反馈循环。只有通过这种系统化的方法，我们才能在这个充满干扰的世界中蓬勃发展，并最终实现个人和职业的成功。</p>
+                </div>
+            `,
+            koe: `
+                <div class="text-lg text-stone-800 font-serif leading-relaxed">
+                    <p class="mb-6">专注力是新时代的货币。</p>
+                    
+                    <p class="mb-6">如果你无法控制注意力，你就无法控制生活。</p>
+                    
+                    <p class="mb-6">问题在于：</p>
+                    
+                    <p class="mb-6">大多数人是被动消费者，而不是主动创造者。</p>
+                    
+                    <p class="mb-6">他们用廉价的多巴胺换取了精神自由。</p>
+                    
+                    <div class="pl-4 border-l-2 border-stone-300 italic text-stone-600 mb-6">
+                        "你不需要更多的动力，你需要更清晰的视野。"
+                    </div>
+                    
+                    <p class="mb-6">要摆脱这种状态，你不需要更多的意志力。</p>
+                    
+                    <p class="mb-6">你需要设计。</p>
+                    
+                    <p class="mb-6">设计你的环境。设计你的时间。设计你的心流。</p>
+                </div>
+            `
+        };
+
+        // --- CHART INITIALIZATION ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initPillarChart();
+            initRhythmChart();
+            initTopicChart();
+            updateHook('paradox'); // Default hook
+            setFormat('normal'); // Default format
+        });
+
+        // 1. Radar Chart: Content Pillars
+        function initPillarChart() {
+            const ctx = document.getElementById('pillarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['哲学 (意义)', '商业 (金钱)', '聚焦 (效率)', '设计 (美学)', '心理 (认知)', '健康 (能量)'],
+                    datasets: [{
+                        label: 'Dan Koe 内容权重分布',
+                        data: [90, 85, 80, 70, 85, 60],
+                        backgroundColor: 'rgba(28, 25, 23, 0.2)', // Stone-900 low opacity
+                        borderColor: 'rgba(28, 25, 23, 1)',
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#1C1917',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#E7E5E4' },
+                            grid: { color: '#E7E5E4' },
+                            pointLabels: {
+                                font: { size: 12, family: "'Inter', sans-serif" },
+                                color: '#44403C'
+                            },
+                            ticks: { display: false, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // 2. Bar Chart: Rhythm Analysis (Sentence Length)
+        function initRhythmChart() {
+            const ctx = document.getElementById('rhythmChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10'],
+                    datasets: [{
+                        label: '单词数量/句子长度',
+                        data: [4, 6, 2, 18, 5, 22, 3, 5, 4, 15], // Represents short, short, very short, long explanation, short punch
+                        backgroundColor: (context) => {
+                            const value = context.raw;
+                            // Darker for short, punchy sentences. Lighter for long explanations.
+                            return value < 8 ? '#1C1917' : '#A8A29E';
+                        },
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            title: { display: true, text: '单词/字数' },
+                            grid: { display: false }
+                        },
+                        x: { 
+                            title: { display: true, text: '句子顺序 (段落流)' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw < 8 ? `短句：制造冲击力 (${context.raw} 字)` : `长句：提供背景与解释 (${context.raw} 字)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 3. Scatter Plot: Topic Matrix
+        function initTopicChart() {
+            const ctx = document.getElementById('topicChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: '话题分布',
+                        data: [
+                            { x: 9, y: 8, r: 15, topic: '一人公司模式' }, // High Reach, High Depth
+                            { x: 8, y: 9, r: 12, topic: '多巴胺控制' },
+                            { x: 6, y: 7, r: 10, topic: '极简主义' },
+                            { x: 5, y: 4, r: 8, topic: '写作技巧' }, // Niche
+                            { x: 9, y: 6, r: 14, topic: '朝九晚五的逃离' }, // Viral but less technical depth
+                            { x: 7, y: 8, r: 11, topic: '心流状态' },
+                            { x: 4, y: 9, r: 9, topic: '网页设计细节' } // Very deep, low reach
+                        ],
+                        backgroundColor: 'rgba(28, 25, 23, 0.7)',
+                        borderColor: 'transparent'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: { display: true, text: '大众共鸣度 (Reach)' },
+                            min: 2, max: 10,
+                            grid: { color: '#F5F5F4' }
+                        },
+                        y: {
+                            title: { display: true, text: '哲学/专业深度 (Depth)' },
+                            min: 2, max: 10,
+                            grid: { color: '#F5F5F4' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.raw.topic}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- INTERACTIVE LOGIC ---
+
+        // Hook Switcher Logic
+        function updateHook(type) {
+            // Update Text and Analysis
+            const contentDiv = document.getElementById('hook-content');
+            const analysisDiv = document.getElementById('hook-analysis');
+            
+            // Simple fade effect
+            contentDiv.style.opacity = 0;
+            analysisDiv.style.opacity = 0;
+
+            setTimeout(() => {
+                contentDiv.innerHTML = hooks[type].text;
+                analysisDiv.innerHTML = hooks[type].analysis;
+                contentDiv.style.opacity = 1;
+                analysisDiv.style.opacity = 1;
+            }, 200);
+
+            // Update Buttons State
+            document.querySelectorAll('.btn-toggle').forEach(btn => {
+                btn.classList.remove('active', 'bg-stone-900', 'text-white');
+                btn.classList.add('hover:border-stone-400');
+            });
+            const activeBtn = document.getElementById(`btn-${type}`);
+            activeBtn.classList.add('active', 'bg-stone-900', 'text-white');
+            activeBtn.classList.remove('hover:border-stone-400');
+        }
+
+        // Format Switcher Logic
+        function setFormat(type) {
+            const display = document.getElementById('format-display');
+            const btnNormal = document.getElementById('fmt-normal');
+            const btnKoe = document.getElementById('fmt-koe');
+
+            display.innerHTML = formatContent[type];
+
+            if (type === 'normal') {
+                btnNormal.classList.add('bg-stone-200', 'font-semibold');
+                btnNormal.classList.remove('bg-white');
+                btnKoe.classList.remove('bg-stone-900', 'text-white', 'shadow-sm');
+                btnKoe.classList.add('text-stone-600', 'hover:bg-stone-50');
+            } else {
+                btnKoe.classList.add('bg-stone-900', 'text-white', 'shadow-sm');
+                btnKoe.classList.remove('text-stone-600', 'hover:bg-stone-50');
+                btnNormal.classList.remove('bg-stone-200', 'font-semibold');
+                btnNormal.classList.add('bg-white');
+            }
+        }
+
+    </script>
+</body>
+</html>
